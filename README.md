@@ -23,7 +23,7 @@
 
 ## Автор
 
-**Максим Запрудин**  
+**Михаил Запрудин**  
 - GitHub: [@pepelax](https://github.com/pepelax) / [@mzaprudin](https://github.com/mzaprudin)
 - Демо-репозиторий к статье: [mzaprudin/zero-alloc-json](https://github.com/mzaprudin/zero-alloc-json)
 
