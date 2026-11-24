@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="456" viewBox="0 0 960 456" role="img" aria-labelledby="title desc">
   <title id="title">Разбор токена на стыке сетевых буферов</title>
   <desc id="desc">Сравнение обработки разрезанного токена на границе двух страниц памяти: скрытая аллокация в BCL через ToArray против безаллокационного копирования на стек в JsonPopulator.</desc>
 
   <!-- Background -->
-  <rect width="960" height="430" rx="14" fill="#0f172a"/>
+  <rect width="960" height="456" rx="14" fill="#0f172a"/>
 
   <!-- Top Title Bar -->
   <text x="36" y="36" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" letter-spacing="0.3">РАЗБОР ТОКЕНА НА СТЫКЕ СЕТЕВЫХ СЕГМЕНТОВ (ReadOnlySequence&lt;byte&gt;)</text>
@@ -24,10 +24,10 @@
       <text x="294" y="26" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="14" font-weight="700">"b":"610</text>
     </g>
 
-    <!-- Boundary line -->
-    <line x1="444" y1="-8" x2="444" y2="104" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4"/>
-    <rect x="376" y="98" width="136" height="24" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1"/>
-    <text x="385" y="115" fill="#fcd34d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="700">СТЫК БУФЕРОВ</text>
+    <!-- Boundary line and Badge -->
+    <line x1="444" y1="-8" x2="444" y2="102" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4"/>
+    <rect x="376" y="96" width="136" height="24" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1"/>
+    <text x="385" y="113" fill="#fcd34d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="700">СТЫК БУФЕРОВ</text>
 
     <!-- Segment 2 -->
     <rect x="452" y="0" width="436" height="92" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
@@ -44,14 +44,14 @@
     </g>
   </g>
 
-  <!-- Reader detection banner -->
-  <g transform="translate(36, 178)">
+  <!-- Reader detection banner (with generous 28px vertical gap after "СТЫК БУФЕРОВ") -->
+  <g transform="translate(36, 204)">
     <rect width="888" height="38" rx="6" fill="#1e1e2e" stroke="#6366f1" stroke-width="1.2"/>
     <text x="20" y="24" fill="#c7d2fe" font-family="ui-monospace, monospace" font-size="13.5" font-weight="600">Utf8JsonReader: токен разрезан -&gt; reader.HasValueSequence = true; (Length = 8)</text>
   </g>
 
   <!-- Left Branch: BCL -->
-  <g transform="translate(36, 230)">
+  <g transform="translate(36, 254)">
     <rect width="432" height="180" rx="10" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
     <rect x="0" y="0" width="432" height="34" rx="10" fill="#450a0a"/>
     <text x="16" y="23" fill="#fca5a5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700">СТАНДАРТНЫЙ BCL (reader.GetDecimal)</text>
@@ -67,7 +67,7 @@
   </g>
 
   <!-- Right Branch: JsonPopulator -->
-  <g transform="translate(492, 230)">
+  <g transform="translate(492, 254)">
     <rect width="432" height="180" rx="10" fill="#13231c" stroke="#10b981" stroke-width="1.5"/>
     <rect x="0" y="0" width="432" height="34" rx="10" fill="#064e3b"/>
     <text x="16" y="23" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700">РЕШЕНИЕ JSONPOPULATOR (Стековый буфер)</text>
