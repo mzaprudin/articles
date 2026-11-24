@@ -1,22 +1,16 @@
 # 0 B/op и на 34% быстрее System.Text.Json: парсинг JSON в существующие объекты в .NET
 
-[![Сводные результаты бенчмарков: System.Text.Json против JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)
-
-При обработке непрерывного потока сообщений из WebSocket стандартный `System.Text.Json` на каждый пакет выделяет новые объекты в Gen0, провоцируя паузы сборщика мусора и накопление очередей в сокетах.
-
-Парсер `JsonPopulator` решает эту задачу через десериализацию прямо в **существующие экземпляры классов и структур**, обеспечивая 0 B/op и ускорение на 21-34%. 
-
-Ниже разбор того, почему встроенный в .NET 8 режим `Populate` не спасает на верхнем уровне, как устроены безаллокационные коллекции `FastList<T>`, где в BCL прячутся скрытые копирования на стыках сетевых буферов `PipeReader` и как воспроизвести все замеры на открытом коде.
-
-<cut>
-
 На криптобирже происходит резкий ценовой импульс. Торговая активность взлетает, обновления стакана и потока сделок сыплются десятками тысяч в секунду, а торговому движку или арбитражному сервису необходимо за минимальное время рассчитать новую справедливую цену. 
 
 В высоконагруженных криптосервисах нельзя просто перейти на компактные бинарные протоколы вроде SBE (Simple Binary Encoding), FlatBuffers или Protobuf: публичные WebSocket API бирж (Binance, Bybit, Gate, OKX) отдают потоки рыночных данных **исключительно в текстовом формате JSON**. Если на каждое входящее сообщение сервис десериализует JSON в новый набор управляемых объектов, он быстро создаёт высокую нагрузку на сборщик мусора (GC pressure).
 
 В момент, когда сборщик мусора ставит поток обработки на паузу, входящий сокет продолжает буферизовать пакеты. Задержка обработки растёт, и к моменту вычитки котировки успевают устареть. На быстром рынке даже пауза в единицы миллисекунд приводит к проскальзыванию (slippage) и исполнению ордеров по невыгодным ценам. [Торговая активность и волатильность](https://doi.org/10.1007/s11156-024-01304-1) · [Задержки и цена исполнения](https://ora.ox.ac.uk/objects/uuid%3Acdab1de2-7576-42e2-abae-ab12371eba76/files/rs4655j600)
 
-Исходный код решения, тесты и воспроизводимые бенчмарки опубликованы в открытом репозитории [zero-alloc-json на GitHub](https://github.com/mzaprudin/zero-alloc-json).
+Чтобы устранить этот фактор, был разработан парсер `JsonPopulator`. Его задача - десериализовать JSON-сообщения прямо в **существующие экземпляры классов и структур**, переиспользуя строковые значения и внутренние списки без единой аллокации в куче (0 B/op). Исходный код решения, тесты и воспроизводимые бенчмарки опубликованы в открытом репозитории [zero-alloc-json на GitHub](https://github.com/mzaprudin/zero-alloc-json).
+
+Ниже разбор того, почему `System.Text.Json` не решает эту задачу из коробки, как устроена архитектура безаллокационного парсинга в .NET, где в базовой библиотеке классов (Base Class Library, BCL) прячутся скрытые аллокации на стыках сетевых буферов и что показывают бенчмарки на реальных биржевых данных.
+
+<cut>
 
 [![Сравнение жизненного цикла объектов: System.Text.Json против JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/01-approach-comparison.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/01-approach-comparison.png)
 
@@ -354,6 +348,8 @@ private bool TryGetDecimalMultiSegment(out decimal value)
 ## Результаты бенчмарков
 
 Замеры производительности проводились с помощью `BenchmarkDotNet v0.15.8` на процессоре **AMD Ryzen 9 5950X**, ОС Ubuntu 24.04.3 LTS, среда execution: **.NET 10.0.14** (Release/x64 RyuJIT).
+
+[![Сводные результаты бенчмарков: System.Text.Json против JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)
 
 ### Тест 1. Разбор компактного объекта сделки (Trade, 156 байт)
 
