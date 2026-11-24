@@ -1,5 +1,7 @@
 # 0 B/op и на 34% быстрее System.Text.Json: парсинг JSON в существующие объекты в .NET
 
+[![Сравнение производительности: System.Text.Json vs JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-cover-benchmark-780x440.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-cover-benchmark-780x440.png)
+
 На криптобирже происходит резкий ценовой импульс. Торговая активность взлетает, обновления стакана и потока сделок сыплются десятками тысяч в секунду, а торговому движку или арбитражному сервису необходимо за минимальное время рассчитать новую справедливую цену. 
 
 В высоконагруженных криптосервисах нельзя просто перейти на компактные бинарные протоколы вроде SBE (Simple Binary Encoding), FlatBuffers или Protobuf: публичные WebSocket API бирж (Binance, Bybit, Gate, OKX) отдают потоки рыночных данных **исключительно в текстовом формате JSON**. Если на каждое входящее сообщение сервис десериализует JSON в новый набор управляемых объектов, он быстро создаёт высокую нагрузку на сборщик мусора (GC pressure).
@@ -348,8 +350,6 @@ private bool TryGetDecimalMultiSegment(out decimal value)
 ## Результаты бенчмарков
 
 Замеры производительности проводились с помощью `BenchmarkDotNet v0.15.8` на процессоре **AMD Ryzen 9 5950X**, ОС Ubuntu 24.04.3 LTS, среда execution: **.NET 10.0.14** (Release/x64 RyuJIT).
-
-[![Сводные результаты бенчмарков: System.Text.Json vs JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)
 
 ### Тест 1. Разбор компактного объекта сделки (Trade, 156 байт)
 
