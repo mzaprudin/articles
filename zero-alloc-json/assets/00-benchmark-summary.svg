@@ -1,96 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="380" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
   <title id="title">Сравнение производительности: System.Text.Json vs JsonPopulator</title>
-  <desc id="desc">Сравнение времени разбора и аллокаций в управляемой куче между System.Text.Json и JsonPopulator на реальных данных криптобирж.</desc>
+  <desc id="desc">Сравнение времени разбора и аллокаций в куче между System.Text.Json и JsonPopulator на реальных данных.</desc>
 
-  <!-- Background Base -->
-  <rect width="960" height="520" rx="14" fill="#0f172a"/>
-  <rect width="960" height="520" rx="14" fill="none" stroke="#334155" stroke-width="1.5"/>
+  <!-- Background -->
+  <rect width="960" height="380" rx="12" fill="#0f172a"/>
+  <rect width="960" height="380" rx="12" fill="none" stroke="#334155" stroke-width="1.5"/>
 
-  <!-- Header Title & Subtitle -->
-  <g transform="translate(36, 42)">
-    <text x="0" y="0" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700">Сравнение производительности: System.Text.Json vs JsonPopulator</text>
-    <text x="0" y="26" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Измерения BenchmarkDotNet на .NET 10 (AMD Ryzen 9 5950X, Linux) на реальных биржевых данных</text>
+  <!-- Header Title -->
+  <g transform="translate(32, 34)">
+    <text x="0" y="0" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700">Сравнение производительности: System.Text.Json против JsonPopulator</text>
   </g>
 
   <!-- Table Container -->
-  <g transform="translate(36, 102)">
-    <!-- Table Header Row -->
-    <rect x="0" y="0" width="888" height="42" rx="8" fill="#1e293b"/>
-    <text x="24" y="26" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">СЦЕНАРИЙ И ДАННЫЕ</text>
-    <text x="274" y="26" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">SYSTEM.TEXT.JSON</text>
-    <text x="474" y="26" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">JSONPOPULATOR</text>
-    <text x="684" y="26" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">ВЫИГРЫШ</text>
+  <g transform="translate(32, 58)">
+    <!-- Header Row -->
+    <rect x="0" y="0" width="896" height="38" rx="6" fill="#1e293b"/>
+    <text x="20" y="24" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">СЦЕНАРИЙ</text>
+    <text x="260" y="24" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">SYSTEM.TEXT.JSON</text>
+    <text x="480" y="24" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">JSONPOPULATOR</text>
+    <text x="700" y="24" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="0.5">РЕЗУЛЬТАТ</text>
 
-    <!-- Row 1: Trade (156 B) -->
-    <g transform="translate(0, 56)">
-      <rect width="888" height="96" rx="10" fill="#141e33" stroke="#1e293b" stroke-width="1.5"/>
-
+    <!-- Row 1: Trade -->
+    <g transform="translate(0, 48)">
+      <rect width="896" height="74" rx="8" fill="#141e33" stroke="#1e293b" stroke-width="1.2"/>
+      
       <!-- Scenario -->
-      <text x="24" y="38" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Сделка Trade</text>
-      <text x="24" y="66" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">156 байт UTF-8 • 7 полей</text>
-
+      <text x="20" y="30" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Сделка Trade</text>
+      <text x="20" y="54" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">156 байт UTF-8 • 7 полей</text>
+      
       <!-- STJ -->
-      <text x="274" y="38" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="16" font-weight="600">521,4 нс</text>
-      <rect x="274" y="48" width="130" height="28" rx="6" fill="#2d1519" stroke="#f87171" stroke-opacity="0.5" stroke-width="1"/>
-      <text x="339" y="67" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="13" font-weight="600" text-anchor="middle">120 B в куче</text>
-
+      <text x="260" y="30" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="15" font-weight="600">521,4 нс</text>
+      <text x="260" y="54" fill="#f87171" font-family="ui-monospace, monospace" font-size="13" font-weight="600">120 B в куче</text>
+      
       <!-- JsonPopulator -->
-      <text x="474" y="38" fill="#ffffff" font-family="ui-monospace, monospace" font-size="16" font-weight="700">430,5 нс</text>
-      <rect x="474" y="48" width="154" height="28" rx="6" fill="#064e3b" stroke="#10b981" stroke-opacity="0.6" stroke-width="1"/>
-      <text x="551" y="67" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="13" font-weight="700" text-anchor="middle">0 B в куче (0 B/op)</text>
-
+      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">430,5 нс</text>
+      <text x="480" y="54" fill="#34d399" font-family="ui-monospace, monospace" font-size="13" font-weight="700">0 B / op (0 B в куче)</text>
+      
       <!-- Result -->
-      <text x="684" y="38" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">на 21% быстрее</text>
-      <rect x="684" y="48" width="154" height="28" rx="6" fill="#0c4a6e" stroke="#0284c7" stroke-opacity="0.6" stroke-width="1"/>
-      <text x="761" y="67" fill="#7dd3fc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" text-anchor="middle">0 B аллокаций (-100%)</text>
+      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">на 21% быстрее</text>
+      <text x="700" y="54" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">0 B аллокаций (-100%)</text>
     </g>
 
-    <!-- Row 2: Contract (1.3 KB) -->
-    <g transform="translate(0, 166)">
-      <rect width="888" height="96" rx="10" fill="#141e33" stroke="#1e293b" stroke-width="1.5"/>
-
+    <!-- Row 2: Contract -->
+    <g transform="translate(0, 132)">
+      <rect width="896" height="74" rx="8" fill="#141e33" stroke="#1e293b" stroke-width="1.2"/>
+      
       <!-- Scenario -->
-      <text x="24" y="38" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Контракт Gate</text>
-      <text x="24" y="66" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">1 312 байт UTF-8 • 50 полей</text>
-
+      <text x="20" y="30" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Контракт Gate</text>
+      <text x="20" y="54" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">1 312 байт UTF-8 • 50 полей</text>
+      
       <!-- STJ -->
-      <text x="274" y="38" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="16" font-weight="600">2,48 мкс</text>
-      <rect x="274" y="48" width="130" height="28" rx="6" fill="#2d1519" stroke="#f87171" stroke-opacity="0.5" stroke-width="1"/>
-      <text x="339" y="67" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="13" font-weight="600" text-anchor="middle">208 B в куче</text>
-
+      <text x="260" y="30" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="15" font-weight="600">2,48 мкс</text>
+      <text x="260" y="54" fill="#f87171" font-family="ui-monospace, monospace" font-size="13" font-weight="600">208 B в куче</text>
+      
       <!-- JsonPopulator -->
-      <text x="474" y="38" fill="#ffffff" font-family="ui-monospace, monospace" font-size="16" font-weight="700">1,85 мкс</text>
-      <rect x="474" y="48" width="154" height="28" rx="6" fill="#064e3b" stroke="#10b981" stroke-opacity="0.6" stroke-width="1"/>
-      <text x="551" y="67" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="13" font-weight="700" text-anchor="middle">0 B в куче (0 B/op)</text>
-
+      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">1,85 мкс</text>
+      <text x="480" y="54" fill="#34d399" font-family="ui-monospace, monospace" font-size="13" font-weight="700">0 B / op (0 B в куче)</text>
+      
       <!-- Result -->
-      <text x="684" y="38" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">на 34% быстрее</text>
-      <rect x="684" y="48" width="154" height="28" rx="6" fill="#0c4a6e" stroke="#0284c7" stroke-opacity="0.6" stroke-width="1"/>
-      <text x="761" y="67" fill="#7dd3fc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" text-anchor="middle">0 B аллокаций (-100%)</text>
+      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">на 34% быстрее</text>
+      <text x="700" y="54" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">0 B аллокаций (-100%)</text>
     </g>
 
-    <!-- Row 3: Array of 592 Contracts (~1 MB) -->
-    <g transform="translate(0, 276)">
-      <rect width="888" height="96" rx="10" fill="#141e33" stroke="#1e293b" stroke-width="1.5"/>
-
+    <!-- Row 3: Array -->
+    <g transform="translate(0, 216)">
+      <rect width="896" height="74" rx="8" fill="#141e33" stroke="#1e293b" stroke-width="1.2"/>
+      
       <!-- Scenario -->
-      <text x="24" y="38" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Массив контрактов</text>
-      <text x="24" y="66" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">592 контракта • ~1 МБ JSON</text>
-
+      <text x="20" y="30" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Массив контрактов</text>
+      <text x="20" y="54" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">592 контракта • ~1 МБ JSON</text>
+      
       <!-- STJ -->
-      <text x="274" y="38" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="16" font-weight="600">1,80 мс</text>
-      <rect x="274" y="48" width="130" height="28" rx="6" fill="#2d1519" stroke="#f87171" stroke-opacity="0.5" stroke-width="1"/>
-      <text x="339" y="67" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="13" font-weight="600" text-anchor="middle">141 КБ в куче</text>
-
+      <text x="260" y="30" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="15" font-weight="600">1,80 мс</text>
+      <text x="260" y="54" fill="#f87171" font-family="ui-monospace, monospace" font-size="13" font-weight="600">141 КБ в куче</text>
+      
       <!-- JsonPopulator -->
-      <text x="474" y="38" fill="#ffffff" font-family="ui-monospace, monospace" font-size="16" font-weight="700">1,46 мс</text>
-      <rect x="474" y="48" width="154" height="28" rx="6" fill="#064e3b" stroke="#10b981" stroke-opacity="0.6" stroke-width="1"/>
-      <text x="551" y="67" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="13" font-weight="700" text-anchor="middle">0 B в куче (FastList)</text>
-
+      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">1,46 мс</text>
+      <text x="480" y="54" fill="#34d399" font-family="ui-monospace, monospace" font-size="13" font-weight="700">0 B в куче (FastList)</text>
+      
       <!-- Result -->
-      <text x="684" y="38" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">на 23% быстрее</text>
-      <rect x="684" y="48" width="154" height="28" rx="6" fill="#0c4a6e" stroke="#0284c7" stroke-opacity="0.6" stroke-width="1"/>
-      <text x="761" y="67" fill="#7dd3fc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" text-anchor="middle">0 B аллокаций (-141 КБ)</text>
+      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">на 23% быстрее</text>
+      <text x="700" y="54" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">0 B аллокаций (-141 КБ)</text>
     </g>
 
   </g>
