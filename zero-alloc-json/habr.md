@@ -20,6 +20,10 @@
 
 Создание единичного небольшого объекта в .NET происходит предельно быстро - это просто сдвиг указателя в Gen0. Однако при непрерывном потоке в десятки тысяч сообщений в секунду этот бюджет мгновенно исчерпывается. 
 
+[![Влияние паузы GC на длину очереди и период восстановления задержки (Queue Draining)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/02-queue-latency-spike.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/02-queue-latency-spike.png)
+
+<spoiler title="Математика очереди: подробный расчёт времени рассасывания пробки">
+
 Рассмотрим математику очереди на конкретном примере:
 1. На вход сокета поступает поток **50 000 сообщений в секунду** (то есть ровно 50 сообщений в каждую миллисекунду).
 2. Сборщик мусора запускает Stop-The-World паузу всего на **4 миллисекунды**. На это время поток разбора полностью замирает.
@@ -31,7 +35,7 @@
 
 Все эти 20 мс в очереди физически находятся необработанные сообщения. Любой новый пакет, пришедший *после* завершения паузы GC, встаёт в хвост пробки и ждёт вычитки предыдущих. В результате пауза GC длилась всего 4 мс, а период деградации задержки (recovery time) растянулся ещё на 20 мс - суммарно почти 25 мс всплеска задержки.
 
-[![Влияние паузы GC на длину очереди и период восстановления задержки (Queue Draining)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/02-queue-latency-spike.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/02-queue-latency-spike.png)
+</spoiler>
 
 Метрика среднего времени отклика за сутки полностью маскирует такие эпизоды. В критических подсистемах ключевой ориентир - перцентили `p99` и `p99.9`. Чтобы обнаружить причину всплесков, метрики аллокаций, задержек и паузы GC сопоставляют на единой временной шкале через встроенные счетчики рантайма или `dotnet-trace`. [Метрики среды .NET](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/built-in-metrics-runtime) · [Трассировка через dotnet-trace](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-trace)
 
