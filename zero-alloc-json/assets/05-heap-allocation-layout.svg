@@ -82,7 +82,7 @@
       <text x="12" y="143" fill="#ffffff">'B','T','C','U','S','D','T','\0'</text>
 
       <rect x="0" y="156" width="350" height="30" rx="4" fill="#0f172a" stroke="#334155"/>
-      <text x="12" y="176" fill="#cbd5e1">Alignment Padding (выравнивание 8B): <tspan fill="#f59e0b" font-weight="700">4B</tspan></text>
+      <text x="12" y="176" fill="#cbd5e1">Alignment Padding: <tspan fill="#f59e0b" font-weight="700">4B</tspan></text>
     </g>
   </g>
 
@@ -94,26 +94,26 @@
     <g transform="translate(16, 38)">
       <!-- Box 1: STJ -->
       <g transform="translate(0, 0)">
-        <rect x="0" y="0" width="272" height="82" rx="6" fill="#2d1519" stroke="#ef4444" stroke-width="1.2"/>
+        <rect x="0" y="0" width="274" height="82" rx="6" fill="#2d1519" stroke="#ef4444" stroke-width="1.2"/>
         <text x="14" y="24" fill="#fca5a5" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700">1. System.Text.Json</text>
-        <text x="14" y="48" fill="#f87171" font-family="ui-monospace, monospace" font-size="16" font-weight="700">120 B / сообщение</text>
-        <text x="14" y="68" fill="#fecaca" font-family="-apple-system, sans-serif" font-size="12.5">Новый Trade (80B) + новая строка (40B)</text>
+        <text x="14" y="48" fill="#f87171" font-family="ui-monospace, monospace" font-size="16" font-weight="700">120 B / сообщ</text>
+        <text x="14" y="68" fill="#fecaca" font-family="-apple-system, sans-serif" font-size="12">Trade (80 B) + строка (40 B)</text>
       </g>
 
       <!-- Box 2: Populator Reused -->
-      <g transform="translate(292, 0)">
-        <rect x="0" y="0" width="272" height="82" rx="6" fill="#291e0a" stroke="#f59e0b" stroke-width="1.2"/>
-        <text x="14" y="24" fill="#fde68a" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700">2. Populator (объект повторно)</text>
-        <text x="14" y="48" fill="#fbbf24" font-family="ui-monospace, monospace" font-size="16" font-weight="700">40 B / сообщение</text>
-        <text x="14" y="68" fill="#fef3c7" font-family="-apple-system, sans-serif" font-size="12.5">Trade мутируется (0B) + новая строка (40B)</text>
+      <g transform="translate(291, 0)">
+        <rect x="0" y="0" width="274" height="82" rx="6" fill="#291e0a" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="14" y="24" fill="#fde68a" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700">2. Populator (повторно)</text>
+        <text x="14" y="48" fill="#fbbf24" font-family="ui-monospace, monospace" font-size="16" font-weight="700">40 B / сообщ</text>
+        <text x="14" y="68" fill="#fef3c7" font-family="-apple-system, sans-serif" font-size="12">Trade мутирован + строка (40 B)</text>
       </g>
 
       <!-- Box 3: Populator + Interner -->
-      <g transform="translate(584, 0)">
-        <rect x="0" y="0" width="272" height="82" rx="6" fill="#062e22" stroke="#10b981" stroke-width="1.5"/>
+      <g transform="translate(582, 0)">
+        <rect x="0" y="0" width="274" height="82" rx="6" fill="#062e22" stroke="#10b981" stroke-width="1.5"/>
         <text x="14" y="24" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700">3. Populator + Interner</text>
-        <text x="14" y="48" fill="#34d399" font-family="ui-monospace, monospace" font-size="16" font-weight="700">0 B / сообщение</text>
-        <text x="14" y="68" fill="#ecfdf5" font-family="-apple-system, sans-serif" font-size="12.5">Trade мутируется (0B) + строка из пула (0B)</text>
+        <text x="14" y="48" fill="#34d399" font-family="ui-monospace, monospace" font-size="16" font-weight="700">0 B / сообщ</text>
+        <text x="14" y="68" fill="#ecfdf5" font-family="-apple-system, sans-serif" font-size="12">Trade мутирован + пул строк (0 B)</text>
       </g>
     </g>
   </g>

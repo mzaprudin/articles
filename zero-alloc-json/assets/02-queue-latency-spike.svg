@@ -49,7 +49,7 @@
 
     <!-- Queue box -->
     <rect x="14" y="152" width="248" height="48" rx="6" fill="#291e0a" stroke="#f59e0b" stroke-width="1"/>
-    <text x="24" y="172" fill="#fde68a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Время ликвидации 200 пакетов:</text>
+    <text x="24" y="172" fill="#fde68a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Ликвидация 200 пакетов:</text>
     <text x="24" y="190" fill="#fef3c7" font-family="ui-monospace, monospace" font-size="13" font-weight="600">200 / 10 = 20 миллисекунд</text>
   </g>
 
@@ -77,14 +77,14 @@
   <g transform="translate(36, 296)">
     <rect width="888" height="52" rx="8" fill="#131c2e" stroke="#334155" stroke-width="1"/>
     <!-- GC bar -->
-    <rect x="12" y="11" width="144" height="30" rx="5" fill="#ef4444" fill-opacity="0.85"/>
-    <text x="24" y="31" fill="#ffffff" font-family="ui-monospace, monospace" font-size="12.5" font-weight="700">Пауза GC: 4 мс</text>
+    <rect x="12" y="11" width="134" height="30" rx="5" fill="#ef4444" fill-opacity="0.85"/>
+    <text x="22" y="31" fill="#ffffff" font-family="ui-monospace, monospace" font-size="12" font-weight="700">Пауза GC: 4 мс</text>
 
     <!-- Recovery bar -->
-    <rect x="162" y="11" width="460" height="30" rx="5" fill="#f59e0b" fill-opacity="0.85"/>
-    <text x="174" y="31" fill="#ffffff" font-family="ui-monospace, monospace" font-size="12.5" font-weight="700">Хвост повышенной задержки (Recovery): 20 мс</text>
+    <rect x="154" y="11" width="430" height="30" rx="5" fill="#f59e0b" fill-opacity="0.85"/>
+    <text x="166" y="31" fill="#ffffff" font-family="ui-monospace, monospace" font-size="12" font-weight="700">Хвост повышенной задержки (Recovery): 20 мс</text>
 
     <!-- Total label -->
-    <text x="636" y="32" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700">Суммарный всплеск latency: ~24 мс</text>
+    <text x="600" y="31" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700">Суммарный всплеск: ~24 мс</text>
   </g>
 </svg>
