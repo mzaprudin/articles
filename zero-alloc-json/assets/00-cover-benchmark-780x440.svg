@@ -30,15 +30,15 @@
 
       <!-- STJ -->
       <text x="200" y="35" fill="#cbd5e1" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="15" font-weight="600">521,4 нс</text>
-      <text x="200" y="63" fill="#f87171" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="12" font-weight="600">120 B в куче</text>
+      <text x="200" y="63" fill="#f87171" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="13" font-weight="600">120 B/op</text>
 
       <!-- JsonPopulator -->
       <text x="370" y="35" fill="#ffffff" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="15" font-weight="700">430,5 нс</text>
-      <text x="370" y="63" fill="#34d399" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="12" font-weight="700">0 B / op (0 B в куче)</text>
+      <text x="370" y="63" fill="#34d399" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="13" font-weight="700">0 B/op</text>
 
       <!-- Result -->
       <text x="548" y="35" fill="#38bdf8" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">+21% быстрее</text>
-      <text x="548" y="63" fill="#34d399" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">0 B аллокаций (-100%)</text>
+      <text x="548" y="63" fill="#34d399" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">0 B/op (-100%)</text>
     </g>
 
     <!-- Row 2: Contract -->
@@ -51,15 +51,15 @@
 
       <!-- STJ -->
       <text x="200" y="35" fill="#cbd5e1" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="15" font-weight="600">2,48 мкс</text>
-      <text x="200" y="63" fill="#f87171" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="12" font-weight="600">208 B в куче</text>
+      <text x="200" y="63" fill="#f87171" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="13" font-weight="600">208 B/op</text>
 
       <!-- JsonPopulator -->
       <text x="370" y="35" fill="#ffffff" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="15" font-weight="700">1,85 мкс</text>
-      <text x="370" y="63" fill="#34d399" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="12" font-weight="700">0 B / op (0 B в куче)</text>
+      <text x="370" y="63" fill="#34d399" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="13" font-weight="700">0 B/op</text>
 
       <!-- Result -->
       <text x="548" y="35" fill="#38bdf8" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">+34% быстрее</text>
-      <text x="548" y="63" fill="#34d399" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">0 B аллокаций (-100%)</text>
+      <text x="548" y="63" fill="#34d399" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">0 B/op (-100%)</text>
     </g>
 
     <!-- Row 3: Array -->
@@ -72,15 +72,15 @@
 
       <!-- STJ -->
       <text x="200" y="35" fill="#cbd5e1" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="15" font-weight="600">1,80 мс</text>
-      <text x="200" y="63" fill="#f87171" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="12" font-weight="600">141 КБ в куче</text>
+      <text x="200" y="63" fill="#f87171" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="13" font-weight="600">141 КБ/op</text>
 
       <!-- JsonPopulator -->
       <text x="370" y="35" fill="#ffffff" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="15" font-weight="700">1,46 мс</text>
-      <text x="370" y="63" fill="#34d399" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="12" font-weight="700">0 B в куче (FastList)</text>
+      <text x="370" y="63" fill="#34d399" font-family="'Liberation Mono', 'DejaVu Sans Mono', ui-monospace, monospace" font-size="13" font-weight="700">0 B/op (FastList)</text>
 
       <!-- Result -->
       <text x="548" y="35" fill="#38bdf8" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">+23% быстрее</text>
-      <text x="548" y="63" fill="#34d399" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">0 B аллокаций (-141 КБ)</text>
+      <text x="548" y="63" fill="#34d399" font-family="'Liberation Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">0 B/op (-141 КБ)</text>
     </g>
 
   </g>
