@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="460" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">Анатомия аллокаций памяти в 64-битной куче .NET</title>
+  <desc id="desc">Раскладка памяти объекта Trade (80 байт) и строки Symbol (40 байт), объясняющая ступени аллокаций в бенчмарках: 120 B, 40 B и 0 B на сообщение.</desc>
+
+  <defs>
+    <marker id="ptr-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="460" rx="14" fill="#0f172a"/>
+
+  <!-- Top Title Bar -->
+  <text x="36" y="34" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">АНАТОМИЯ АЛЛОКАЦИЙ В 64-БИТНОЙ КУЧЕ: 120 B -&gt; 40 B -&gt; 0 B</text>
+
+  <!-- Object 1: Trade (80 Bytes) -->
+  <g transform="translate(36, 52)">
+    <rect width="470" height="240" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="470" height="30" rx="10" fill="#0c4a6e"/>
+    <text x="16" y="20" fill="#bae6fd" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">ОБЪЕКТ Trade В КУЧЕ (ИТОГО: 80 БАЙТ)</text>
+
+    <!-- Fields Table -->
+    <g transform="translate(14, 40)" font-family="ui-monospace, monospace" font-size="11">
+      <!-- Row 1 -->
+      <rect x="0" y="0" width="216" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="8" y="18" fill="#94a3b8">Object Header: <tspan fill="#38bdf8" font-weight="700">8B</tspan></text>
+
+      <rect x="226" y="0" width="216" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="234" y="18" fill="#94a3b8">MethodTable (MT): <tspan fill="#38bdf8" font-weight="700">8B</tspan></text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="34" width="216" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="8" y="52" fill="#cbd5e1">Id (long): <tspan fill="#38bdf8">8B</tspan></text>
+
+      <rect x="226" y="34" width="216" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="234" y="52" fill="#cbd5e1">Price (double): <tspan fill="#38bdf8">8B</tspan></text>
+
+      <!-- Row 3 -->
+      <rect x="0" y="68" width="216" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="8" y="86" fill="#cbd5e1">Amount (decimal): <tspan fill="#38bdf8">16B</tspan></text>
+
+      <rect x="226" y="68" width="216" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="234" y="86" fill="#cbd5e1">Timestamp (long): <tspan fill="#38bdf8">8B</tspan></text>
+
+      <!-- Row 4 -->
+      <rect x="0" y="102" width="216" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="8" y="120" fill="#cbd5e1">CreatedAt (DateTime): <tspan fill="#38bdf8">8B</tspan></text>
+
+      <rect x="226" y="102" width="216" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="234" y="120" fill="#cbd5e1">IsBuyerMaker+Pad: <tspan fill="#38bdf8">8B</tspan></text>
+
+      <!-- Row 5: Reference -->
+      <rect x="0" y="136" width="442" height="42" rx="5" fill="#132e42" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="12" y="156" fill="#7dd3fc" font-weight="700">Symbol (ссылка на string в куче): 8B</text>
+      <text x="12" y="171" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="10">Указатель на объект строки в куче</text>
+    </g>
+  </g>
+
+  <!-- Pointer Arrow (starts exactly at Trade right border x=506, points to String left border x=546 at Row 5 center y=249) -->
+  <path d="M 506 249 L 540 249" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#ptr-arrow)"/>
+
+  <!-- Object 2: String "BTCUSDT" (40 Bytes) -->
+  <g transform="translate(546, 52)">
+    <rect width="378" height="240" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <rect x="0" y="0" width="378" height="30" rx="10" fill="#451a03"/>
+    <text x="16" y="20" fill="#fde68a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">СТРОКА "BTCUSDT" В КУЧЕ (ИТОГО: 40 БАЙТ)</text>
+
+    <!-- String Layout Table -->
+    <g transform="translate(14, 40)" font-family="ui-monospace, monospace" font-size="11">
+      <rect x="0" y="0" width="350" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="12" y="18" fill="#94a3b8">Object Header: <tspan fill="#f59e0b" font-weight="700">8B</tspan></text>
+
+      <rect x="0" y="34" width="350" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="12" y="52" fill="#94a3b8">MethodTable (MT): <tspan fill="#f59e0b" font-weight="700">8B</tspan></text>
+
+      <rect x="0" y="68" width="350" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="12" y="86" fill="#cbd5e1">Length (int32): <tspan fill="#f59e0b">4B</tspan> (значение: 7)</text>
+
+      <rect x="0" y="102" width="350" height="38" rx="4" fill="#2d1f08" stroke="#f59e0b" stroke-width="1"/>
+      <text x="12" y="120" fill="#fde68a" font-weight="700">Символы UTF-16: 14B + null: 2B (16B)</text>
+      <text x="12" y="133" fill="#cbd5e1">'B','T','C','U','S','D','T','\0'</text>
+
+      <rect x="0" y="146" width="350" height="28" rx="4" fill="#0f172a" stroke="#334155"/>
+      <text x="12" y="164" fill="#64748b">Alignment Padding (выравнивание 8B): <tspan fill="#94a3b8">4B</tspan></text>
+    </g>
+  </g>
+
+  <!-- Bottom Comparison: 3 States -->
+  <g transform="translate(36, 308)">
+    <rect width="888" height="124" rx="10" fill="#131c2e" stroke="#334155" stroke-width="1.2"/>
+    <text x="16" y="24" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" letter-spacing="0.5">РЕЗЮМЕ БЕНЧМАРКОВ ПАМЯТИ:</text>
+
+    <g transform="translate(16, 34)">
+      <!-- Box 1: STJ -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="272" height="74" rx="6" fill="#2d1519" stroke="#ef4444" stroke-width="1"/>
+        <text x="14" y="22" fill="#fca5a5" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700">1. System.Text.Json</text>
+        <text x="14" y="44" fill="#f87171" font-family="ui-monospace, monospace" font-size="15" font-weight="700">120 B / сообщение</text>
+        <text x="14" y="62" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">Новый Trade (80B) + новая строка (40B)</text>
+      </g>
+
+      <!-- Box 2: Populator Reused -->
+      <g transform="translate(292, 0)">
+        <rect x="0" y="0" width="272" height="74" rx="6" fill="#291e0a" stroke="#f59e0b" stroke-width="1"/>
+        <text x="14" y="22" fill="#fde68a" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700">2. Populator (объект повторно)</text>
+        <text x="14" y="44" fill="#fbbf24" font-family="ui-monospace, monospace" font-size="15" font-weight="700">40 B / сообщение</text>
+        <text x="14" y="62" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">Trade мутируется (0B) + новая строка (40B)</text>
+      </g>
+
+      <!-- Box 3: Populator + Interner -->
+      <g transform="translate(584, 0)">
+        <rect x="0" y="0" width="272" height="74" rx="6" fill="#062e22" stroke="#10b981" stroke-width="1.2"/>
+        <text x="14" y="22" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700">3. Populator + Interner</text>
+        <text x="14" y="44" fill="#34d399" font-family="ui-monospace, monospace" font-size="15" font-weight="700">0 B / сообщение</text>
+        <text x="14" y="62" fill="#a7f3d0" font-family="-apple-system, sans-serif" font-size="11">Trade мутируется (0B) + строка из пула (0B)</text>
+      </g>
+    </g>
+  </g>
+</svg>

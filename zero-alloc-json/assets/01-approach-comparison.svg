@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Сравнение стандартного подхода и JsonPopulator</title>
+  <desc id="desc">Сравнение жизненного цикла объектов: System.Text.Json создаёт новые объекты и провоцирует паузы GC, а JsonPopulator мутирует существующие объекты на месте и даёт 0 B/op.</desc>
+  <defs>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f87171"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="420" rx="14" fill="#0f172a"/>
+
+  <!-- Left Column: System.Text.Json -->
+  <g transform="translate(32, 28)">
+    <!-- Container -->
+    <rect width="432" height="364" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="24" y="36" fill="#f87171" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" letter-spacing="0.5">СТАНДАРТНЫЙ ПОДХОД (System.Text.Json)</text>
+
+    <!-- Step 1 -->
+    <rect x="24" y="56" width="384" height="48" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="40" y="85" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Пакет JSON из сокета</text>
+    <path d="M 216 104 L 216 122" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+    <!-- Step 2 -->
+    <rect x="24" y="126" width="384" height="56" rx="8" fill="#2d1519" stroke="#f87171" stroke-opacity="0.5" stroke-width="1"/>
+    <text x="40" y="150" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="13">new Model() + new string("BTCUSDT")</text>
+    <text x="40" y="170" fill="#f87171" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Аллокации в Gen0 на каждое сообщение (120 B/op)</text>
+    <path d="M 216 182 L 216 200" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+    <!-- Step 3 -->
+    <rect x="24" y="204" width="384" height="52" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="40" y="226" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Исчерпание бюджета памяти Gen0</text>
+    <text x="40" y="246" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Короткоживущие объекты заполняют кучу</text>
+    <path d="M 216 256 L 216 274" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+    <!-- Step 4 -->
+    <rect x="24" y="278" width="384" height="62" rx="8" fill="#450a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="40" y="303" fill="#fecaca" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700">Пауза GC (Stop-The-World)</text>
+    <text x="40" y="324" fill="#fca5a5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Всплеск p99 задержки, пробка пакетов в сокете</text>
+  </g>
+
+  <!-- Right Column: JsonPopulator -->
+  <g transform="translate(496, 28)">
+    <!-- Container -->
+    <rect width="432" height="364" rx="10" fill="#13231c" stroke="#164e39" stroke-width="1.5"/>
+    <text x="24" y="36" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" letter-spacing="0.5">ZERO-ALLOC ПОДХОД (JsonPopulator)</text>
+
+    <!-- Step 1 -->
+    <rect x="24" y="56" width="384" height="48" rx="8" fill="#0b1713" stroke="#22543d" stroke-width="1"/>
+    <text x="40" y="85" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Пакет JSON из сокета</text>
+    <path d="M 216 104 L 216 122" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+    <!-- Step 2 -->
+    <rect x="24" y="126" width="384" height="56" rx="8" fill="#063220" stroke="#059669" stroke-width="1"/>
+    <text x="40" y="150" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="13">Populate(json, existingInstance)</text>
+    <text x="40" y="170" fill="#6ee7b7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Переиспользование корневого экземпляра модели</text>
+    <path d="M 216 182 L 216 200" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+    <!-- Step 3 -->
+    <rect x="24" y="204" width="384" height="52" rx="8" fill="#0b1713" stroke="#22543d" stroke-width="1"/>
+    <text x="40" y="226" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Мутация полей in-place + Interner</text>
+    <text x="40" y="246" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Строки берутся по span из пула без аллокаций</text>
+    <path d="M 216 256 L 216 274" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+    <!-- Step 4 -->
+    <rect x="24" y="278" width="384" height="62" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="40" y="303" fill="#ecfdf5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700">0 B/op (GC не запускается)</text>
+    <text x="40" y="324" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Стабильная микросекундная задержка p99</text>
+  </g>
+</svg>
