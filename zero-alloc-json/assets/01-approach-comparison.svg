@@ -17,57 +17,57 @@
   <g transform="translate(32, 28)">
     <!-- Container -->
     <rect width="432" height="364" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
-    <text x="24" y="36" fill="#f87171" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" letter-spacing="0.3">СТАНДАРТНЫЙ ПОДХОД (System.Text.Json)</text>
+    <text x="24" y="36" fill="#f87171" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" letter-spacing="0.2">СТАНДАРТНЫЙ ПОДХОД (System.Text.Json)</text>
 
     <!-- Step 1 -->
     <rect x="24" y="56" width="384" height="48" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
-    <text x="40" y="85" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Пакет JSON из сокета</text>
+    <text x="40" y="86" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600">Пакет JSON из сокета</text>
     <path d="M 216 104 L 216 122" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
 
     <!-- Step 2 -->
-    <rect x="24" y="126" width="384" height="56" rx="8" fill="#2d1519" stroke="#f87171" stroke-opacity="0.5" stroke-width="1"/>
-    <text x="40" y="150" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="13">new Model() + new string("BTCUSDT")</text>
-    <text x="40" y="170" fill="#f87171" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Аллокации в Gen0 на каждое сообщение (120 B/op)</text>
-    <path d="M 216 182 L 216 200" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
+    <rect x="24" y="126" width="384" height="58" rx="8" fill="#2d1519" stroke="#f87171" stroke-opacity="0.6" stroke-width="1"/>
+    <text x="36" y="150" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="14" font-weight="600">new Model() + new string("BTCUSDT")</text>
+    <text x="36" y="172" fill="#fecaca" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Аллокации в Gen0 на каждое сообщение (120 B/op)</text>
+    <path d="M 216 184 L 216 200" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
 
     <!-- Step 3 -->
-    <rect x="24" y="204" width="384" height="52" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
-    <text x="40" y="226" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Исчерпание бюджета памяти Gen0</text>
-    <text x="40" y="246" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Короткоживущие объекты заполняют кучу</text>
-    <path d="M 216 256 L 216 274" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
+    <rect x="24" y="204" width="384" height="54" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="36" y="227" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600">Исчерпание бюджета памяти Gen0</text>
+    <text x="36" y="247" fill="#cbd5e1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Короткоживущие объекты заполняют кучу</text>
+    <path d="M 216 258 L 216 274" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
 
     <!-- Step 4 -->
-    <rect x="24" y="278" width="384" height="62" rx="8" fill="#450a0a" stroke="#ef4444" stroke-width="1.5"/>
-    <text x="40" y="303" fill="#fecaca" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700">Пауза GC (Stop-The-World)</text>
-    <text x="40" y="324" fill="#fca5a5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Всплеск p99 задержки, пробка пакетов в сокете</text>
+    <rect x="24" y="278" width="384" height="64" rx="8" fill="#450a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="36" y="303" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Пауза GC (Stop-The-World)</text>
+    <text x="36" y="326" fill="#fca5a5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500">Всплеск p99 задержки, пробка пакетов в сокете</text>
   </g>
 
   <!-- Right Column: JsonPopulator -->
   <g transform="translate(496, 28)">
     <!-- Container -->
     <rect width="432" height="364" rx="10" fill="#13231c" stroke="#164e39" stroke-width="1.5"/>
-    <text x="24" y="36" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" letter-spacing="0.3">ZERO-ALLOC ПОДХОД (JsonPopulator)</text>
+    <text x="24" y="36" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" letter-spacing="0.2">ZERO-ALLOC ПОДХОД (JsonPopulator)</text>
 
     <!-- Step 1 -->
     <rect x="24" y="56" width="384" height="48" rx="8" fill="#0b1713" stroke="#22543d" stroke-width="1"/>
-    <text x="40" y="85" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Пакет JSON из сокета</text>
+    <text x="40" y="86" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600">Пакет JSON из сокета</text>
     <path d="M 216 104 L 216 122" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-green)"/>
 
     <!-- Step 2 -->
-    <rect x="24" y="126" width="384" height="56" rx="8" fill="#063220" stroke="#059669" stroke-width="1"/>
-    <text x="40" y="150" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="13">Populate(json, existingInstance)</text>
-    <text x="40" y="170" fill="#6ee7b7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Переиспользование корневого экземпляра модели</text>
-    <path d="M 216 182 L 216 200" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-green)"/>
+    <rect x="24" y="126" width="384" height="58" rx="8" fill="#063220" stroke="#059669" stroke-width="1"/>
+    <text x="36" y="150" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="14" font-weight="600">Populate(json, existingInstance)</text>
+    <text x="36" y="172" fill="#6ee7b7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Переиспользование корневого экземпляра модели</text>
+    <path d="M 216 184 L 216 200" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-green)"/>
 
     <!-- Step 3 -->
-    <rect x="24" y="204" width="384" height="52" rx="8" fill="#0b1713" stroke="#22543d" stroke-width="1"/>
-    <text x="40" y="226" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14">Мутация полей in-place + Interner</text>
-    <text x="40" y="246" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Строки берутся по span из пула без аллокаций</text>
-    <path d="M 216 256 L 216 274" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-green)"/>
+    <rect x="24" y="204" width="384" height="54" rx="8" fill="#0b1713" stroke="#22543d" stroke-width="1"/>
+    <text x="36" y="227" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600">Мутация полей in-place + Interner</text>
+    <text x="36" y="247" fill="#cbd5e1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Строки берутся по span из пула без аллокаций</text>
+    <path d="M 216 258 L 216 274" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-green)"/>
 
     <!-- Step 4 -->
-    <rect x="24" y="278" width="384" height="62" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
-    <text x="40" y="303" fill="#ecfdf5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700">0 B/op (GC не запускается)</text>
-    <text x="40" y="324" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Стабильная микросекундная задержка p99</text>
+    <rect x="24" y="278" width="384" height="64" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="36" y="303" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">0 B/op (GC не запускается)</text>
+    <text x="36" y="326" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500">Стабильная микросекундная задержка p99</text>
   </g>
 </svg>

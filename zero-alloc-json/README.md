@@ -10,7 +10,7 @@
 
 Ниже разбор того, почему `System.Text.Json` не решает эту задачу из коробки, как устроена архитектура безаллокационного парсинга в .NET, где в базовой библиотеке классов (Base Class Library, BCL) прячутся скрытые аллокации на стыках сетевых буферов и что показывают бенчмарки на реальных биржевых данных.
 
-![Сравнение жизненного цикла объектов: System.Text.Json против JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/01-approach-comparison.png)
+[![Сравнение жизненного цикла объектов: System.Text.Json против JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/01-approach-comparison.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/01-approach-comparison.png)
 
 ## Как постоянные аллокации влияют на задержки
 
@@ -27,7 +27,7 @@
 
 Все эти 20 мс в очереди физически находятся необработанные сообщения. Любой новый пакет, пришедший *после* завершения паузы GC, встаёт в хвост пробки и ждёт вычитки предыдущих. В результате пауза GC длилась всего 4 мс, а период деградации задержки (recovery time) растянулся ещё на 20 мс - суммарно почти 25 мс всплеска задержки.
 
-![Влияние паузы GC на длину очереди и период восстановления задержки (Queue Draining)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/02-queue-latency-spike.png)
+[![Влияние паузы GC на длину очереди и период восстановления задержки (Queue Draining)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/02-queue-latency-spike.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/02-queue-latency-spike.png)
 
 Метрика среднего времени отклика за сутки полностью маскирует такие эпизоды. В критических подсистемах ключевой ориентир - перцентили `p99` и `p99.9`. Чтобы обнаружить причину всплесков, метрики аллокаций, задержек и паузы GC сопоставляют на единой временной шкале через встроенные счетчики рантайма или `dotnet-trace`. [Метрики среды .NET](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/built-in-metrics-runtime) · [Трассировка через dotnet-trace](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-trace)
 
@@ -256,7 +256,7 @@ _size = 0;
 3. Парсер запрашивает следующий элемент через метод `AddAndGetRef()`, который инкрементирует `_count` и возвращает ссылку `ref T` на уже существующий объект в слоте массива.
 4. Парсер мутирует поля существующего объекта без создания `new T()`.
 
-![Жизненный цикл слотов в FastList при переменной длине входящего массива](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/03-fastlist-lifecycle.png)
+[![Жизненный цикл слотов в FastList при переменной длине входящего массива](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/03-fastlist-lifecycle.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/03-fastlist-lifecycle.png)
 
 ```cs
 sealed class DepthUpdate
@@ -320,7 +320,7 @@ private bool TryGetDecimalMultiSegment(out decimal value)
 
 Так скрытая аллокация в рантайме просачивается в горячий путь обработки. В `JsonPopulator` разбор чисел на стыках буферов всегда идёт через буфер на стеке и `Utf8Parser`, что даёт ровно 0 B/op независимо от того, как сокет нарезал буферы в `PipeReader`.
 
-![Разбор токена на стыке сетевых буферов: ToArray в BCL против стекового буфера в JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/04-segment-boundary-parsing.png)
+[![Разбор токена на стыке сетевых буферов: ToArray в BCL против стекового буфера в JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/04-segment-boundary-parsing.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/04-segment-boundary-parsing.png)
 
 Корректность обработки подтверждена сквозным стресс-тестом `Populate_AllSegmentBoundaries_PreservesValues`: тестовый JSON последовательно разрезается на два сегмента по каждому возможному байтовому смещению от $1$ до $N-1$, и для каждого разреза проверяется эквивалентность разобранных данных.
 
@@ -351,7 +351,7 @@ private bool TryGetDecimalMultiSegment(out decimal value)
 
 #### Анатомия аллокаций в куче: откуда берутся цифры?
 
-![Анатомия аллокаций в 64-битной куче .NET: раскладка объекта Trade и строки Symbol](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/05-heap-allocation-layout.png)
+[![Анатомия аллокаций в 64-битной куче .NET: раскладка объекта Trade и строки Symbol](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/05-heap-allocation-layout.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/05-heap-allocation-layout.png)
 
 - **120 байт:**
   - `Trade` как объект в 64-битной куче занимает **80 байт** (Object Header 8B + указатель MethodTable (MT) 8B + поля данных `long`, `double`, `decimal`, `DateTime`, `bool` + выравнивание по 8 байт).
