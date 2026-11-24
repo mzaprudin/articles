@@ -59,13 +59,15 @@ var msg = JsonSerializer.Deserialize<TradeMessage>(jsonUtf8, options);
 2. **Строки продолжают выделять память:** На каждое строковое свойство (`"Symbol": "BTCUSDT"`) стандартный десериализатор создаёт новый `System.String`. В STJ нет встроенного механизма интернирования строк по `ReadOnlySpan<char>` без предварительной аллокации строки.
 3. **Коллекции порождают мусор:** При разборе списков переменной длины стандартный механизм либо создаёт новую коллекцию, либо зануляет ссылки на элементы, не позволяя переиспользовать уже выделенные объекты.
 
-### А как же кастомная фабрика JsonTypeInfo&lt;T&gt;.CreateObject?
+<spoiler title="Почему не помогла кастомная фабрика JsonTypeInfo<T>.CreateObject?">
 
 Иногда пытаются обойти ограничение через метаданные типа: `typeInfo.CreateObject = () => myReusableInstance;`.
 
 В реальном коде это не работает:
 - **Нет контекста вызова и потокобезопасности:** Сигнатура `CreateObject` - это `Func<object>?`. Делегат привязан к глобальным метаданным `JsonTypeInfo` и не знает, какой именно инстанс вызывающий код хочет заполнить сейчас. Если два потока десериализуют сообщения параллельно, возврат общего объекта приведёт к гонке данных.
 - **Остальные аллокации никуда не исчезают:** Даже если вернуть готовый корневой объект, STJ продолжит аллоцировать строки (`string Symbol`) и внутренние массивы коллекций. Честных 0 B/op так не получить.
+
+</spoiler>
 
 Чтобы получить честные 0 байт на операцию, парсер должен принимать готовый экземпляр снаружи и мутировать его свойства на месте без посредников.
 
@@ -307,6 +309,8 @@ Utf8Parser.TryParse(token, out decimal price, out _);
 
 При вызове метода `reader.GetDecimal()` для числа, попавшего на стык двух сегментов `ReadOnlySequence`, текущая реализация BCL в .NET 10.0.14 внутри вызывает `ValueSequence.ToArray()`:
 
+<spoiler title="Фрагмент исходного кода Utf8JsonReader из .NET Runtime (TryGetDecimalMultiSegment)">
+
 ```cs
 // Исходный код System.Text.Json (Utf8JsonReader.TryGet.cs в .NET 10):
 private bool TryGetDecimalMultiSegment(out decimal value)
@@ -317,6 +321,8 @@ private bool TryGetDecimalMultiSegment(out decimal value)
     ...
 }
 ```
+
+</spoiler>
 
 Так скрытая аллокация в рантайме просачивается в горячий путь обработки. В `JsonPopulator` разбор чисел на стыках буферов всегда идёт через буфер на стеке и `Utf8Parser`, что даёт ровно 0 B/op независимо от того, как сокет нарезал буферы в `PipeReader`.
 
@@ -400,6 +406,8 @@ private bool TryGetDecimalMultiSegment(out decimal value)
 
 Для сборки и запуска бенчмарков потребуется .NET 10 SDK:
 
+<spoiler title="Инструкция по локальному запуску тестов и бенчмарков (Bash)">
+
 ```sh
 # Клонирование и переход в репозиторий
 git clone https://github.com/mzaprudin/zero-alloc-json.git
@@ -419,6 +427,8 @@ dotnet run -c Release --no-build --project benchmarks/ZeroAlloc.Json.Benchmarks 
   --filter '*JsonParsingBenchmarks*' '*LargeJsonParsingBenchmarks*' '*PopulatorBenchmarks*' \
   --warmupCount 5 --iterationCount 15 --iterationTime 500 --launchCount 1
 ```
+
+</spoiler>
 
 ## Когда подход оправдан, а когда лучше остаться на STJ
 
