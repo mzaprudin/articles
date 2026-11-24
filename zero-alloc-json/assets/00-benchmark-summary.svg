@@ -8,7 +8,7 @@
 
   <!-- Header Title -->
   <g transform="translate(32, 34)">
-    <text x="0" y="0" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700">Сравнение производительности: System.Text.Json против JsonPopulator</text>
+    <text x="0" y="0" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700">Сравнение производительности: System.Text.Json vs JsonPopulator</text>
   </g>
 
   <!-- Table Container -->

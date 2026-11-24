@@ -349,7 +349,7 @@ private bool TryGetDecimalMultiSegment(out decimal value)
 
 Замеры производительности проводились с помощью `BenchmarkDotNet v0.15.8` на процессоре **AMD Ryzen 9 5950X**, ОС Ubuntu 24.04.3 LTS, среда execution: **.NET 10.0.14** (Release/x64 RyuJIT).
 
-[![Сводные результаты бенчмарков: System.Text.Json против JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)
+[![Сводные результаты бенчмарков: System.Text.Json vs JsonPopulator](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)](https://raw.githubusercontent.com/mzaprudin/articles/main/zero-alloc-json/assets/00-benchmark-summary.png)
 
 ### Тест 1. Разбор компактного объекта сделки (Trade, 156 байт)
 
