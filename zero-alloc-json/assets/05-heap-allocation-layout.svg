@@ -48,7 +48,7 @@
       <text x="8" y="128" fill="#ffffff">CreatedAt: <tspan fill="#38bdf8" font-weight="700">8B</tspan></text>
 
       <rect x="226" y="108" width="216" height="30" rx="4" fill="#0f172a" stroke="#334155"/>
-      <text x="234" y="128" fill="#ffffff">IsBuyerMaker: <tspan fill="#38bdf8" font-weight="700">8B</tspan></text>
+      <text x="234" y="128" fill="#ffffff">IsBuyerMaker (bool): <tspan fill="#38bdf8" font-weight="700">8B</tspan></text>
 
       <!-- Row 5: Reference -->
       <rect x="0" y="144" width="442" height="48" rx="6" fill="#132e42" stroke="#38bdf8" stroke-width="1.5"/>
