@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
   <title id="title">Сравнение стандартного подхода и JsonPopulator</title>
-  <desc id="desc">Сравнение жизненного цикла объектов: System.Text.Json создаёт новые объекты и провоцирует паузы GC, а JsonPopulator мутирует существующие объекты на месте и даёт 0 B/op.</desc>
+  <desc id="desc">Сравнение жизненного цикла объектов: System.Text.Json vs JsonPopulator. Заполнение существующих объектов даёт 0 B/op.</desc>
   <defs>
     <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#f87171"/>

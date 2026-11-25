@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
   <title id="title">Разбор токена на стыке сетевых буферов</title>
-  <desc id="desc">Сравнение обработки разрезанного токена на границе двух страниц памяти: скрытая аллокация в BCL через ToArray против безаллокационного копирования на стек в JsonPopulator.</desc>
+  <desc id="desc">Сравнение обработки разрезанного токена на границе двух страниц памяти: скрытая аллокация в BCL через ToArray vs копирование на стек без аллокаций в JsonPopulator.</desc>
 
   <!-- Background -->
   <rect width="960" height="440" rx="14" fill="#0f172a"/>
