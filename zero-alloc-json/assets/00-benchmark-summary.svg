@@ -29,15 +29,15 @@
       <text x="20" y="54" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">156 байт UTF-8 • 7 полей</text>
       
       <!-- STJ -->
-      <text x="260" y="30" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="15" font-weight="600">521,4 нс</text>
+      <text x="260" y="30" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="15" font-weight="600">530,6 нс</text>
       <text x="260" y="54" fill="#f87171" font-family="ui-monospace, monospace" font-size="13" font-weight="600">120 B/op</text>
       
       <!-- JsonPopulator -->
-      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">430,5 нс</text>
+      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">431,6 нс</text>
       <text x="480" y="54" fill="#34d399" font-family="ui-monospace, monospace" font-size="13" font-weight="700">0 B/op</text>
       
       <!-- Result -->
-      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">1,21×</text>
+      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">1,23×</text>
       <text x="700" y="54" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">0 B/op (-100%)</text>
     </g>
 
@@ -50,15 +50,15 @@
       <text x="20" y="54" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">1 312 байт UTF-8 • 49 ключей</text>
       
       <!-- STJ -->
-      <text x="260" y="30" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="15" font-weight="600">2,48 мкс</text>
+      <text x="260" y="30" fill="#cbd5e1" font-family="ui-monospace, monospace" font-size="15" font-weight="600">2,30 мкс</text>
       <text x="260" y="54" fill="#f87171" font-family="ui-monospace, monospace" font-size="13" font-weight="600">208 B/op</text>
       
       <!-- JsonPopulator -->
-      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">1,85 мкс</text>
+      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">1,83 мкс</text>
       <text x="480" y="54" fill="#34d399" font-family="ui-monospace, monospace" font-size="13" font-weight="700">0 B/op</text>
       
       <!-- Result -->
-      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">1,34×</text>
+      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">1,26×</text>
       <text x="700" y="54" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">0 B/op (-100%)</text>
     </g>
 
@@ -75,11 +75,11 @@
       <text x="260" y="54" fill="#f87171" font-family="ui-monospace, monospace" font-size="13" font-weight="600">141 КБ/op</text>
       
       <!-- JsonPopulator -->
-      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">1,46 мс</text>
+      <text x="480" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="15" font-weight="700">1,45 мс</text>
       <text x="480" y="54" fill="#34d399" font-family="ui-monospace, monospace" font-size="13" font-weight="700">0 B/op (FastList)</text>
       
       <!-- Result -->
-      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">1,23×</text>
+      <text x="700" y="30" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">1,24×</text>
       <text x="700" y="54" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">0 B/op (-141 КБ)</text>
     </g>
 

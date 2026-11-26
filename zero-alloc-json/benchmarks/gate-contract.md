@@ -20,16 +20,16 @@ BenchmarkDotNet v0.15.8, Linux Ubuntu 24.04.3 LTS (Noble Numbat)
 AMD Ryzen 9 5950X 0.55GHz, 1 CPU, 32 logical and 16 physical cores
 .NET SDK 10.0.115
   [Host]     : .NET 10.0.15 (10.0.15, 10.0.1526.53008), X64 RyuJIT x86-64-v3
-  Job-XJMUZM : .NET 10.0.15 (10.0.15, 10.0.1526.53008), X64 RyuJIT x86-64-v3
+  Job-KOVDBU : .NET 10.0.15 (10.0.15, 10.0.1526.53008), X64 RyuJIT x86-64-v3
 
-IterationCount=10  IterationTime=300ms  LaunchCount=1  
-WarmupCount=3  
+IterationCount=15  IterationTime=500ms  LaunchCount=1  
+WarmupCount=5  
 
 ```
-| Method                  | Mean     | Error     | StdDev    | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
-|------------------------ |---------:|----------:|----------:|------:|--------:|-------:|----------:|------------:|
-| SystemTextJson          | 2.481 μs | 0.0466 μs | 0.0308 μs |  1.00 |    0.02 | 0.0083 |     208 B |        1.00 |
-| PopulatorNewObject      | 2.016 μs | 0.0287 μs | 0.0190 μs |  0.81 |    0.01 | 0.0070 |     208 B |        1.00 |
-| PopulatorReusedObject   | 2.008 μs | 0.0441 μs | 0.0292 μs |  0.81 |    0.01 | 0.0066 |     120 B |        0.58 |
-| PopulatorReusedInterned | 1.847 μs | 0.0280 μs | 0.0185 μs |  0.74 |    0.01 |      - |         - |        0.00 |
-| PopulatorStructRef      | 1.872 μs | 0.0255 μs | 0.0168 μs |  0.75 |    0.01 |      - |         - |        0.00 |
+| Method                  | Mean     | Error     | StdDev    | Ratio | Gen0   | Allocated | Alloc Ratio |
+|------------------------ |---------:|----------:|----------:|------:|-------:|----------:|------------:|
+| SystemTextJson          | 2.301 μs | 0.0250 μs | 0.0234 μs |  1.00 | 0.0091 |     208 B |        1.00 |
+| PopulatorNewObject      | 1.978 μs | 0.0142 μs | 0.0126 μs |  0.86 | 0.0120 |     208 B |        1.00 |
+| PopulatorReusedObject   | 1.945 μs | 0.0128 μs | 0.0119 μs |  0.85 | 0.0039 |     120 B |        0.58 |
+| PopulatorReusedInterned | 1.857 μs | 0.0096 μs | 0.0080 μs |  0.81 |      - |         - |        0.00 |
+| PopulatorStructRef      | 1.833 μs | 0.0109 μs | 0.0097 μs |  0.80 |      - |         - |        0.00 |
